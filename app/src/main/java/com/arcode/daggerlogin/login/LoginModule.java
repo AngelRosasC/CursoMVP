@@ -1,4 +1,4 @@
-package com.arcode.daggerlogin.Login;
+package com.arcode.daggerlogin.login;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,4 +1,4 @@
-package com.arcode.daggerlogin.Login;
+package com.arcode.daggerlogin.login;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.arcode.daggerlogin.R;
-import com.arcode.daggerlogin.Root.App;
+import com.arcode.daggerlogin.root.App;
 
 import javax.inject.Inject;
 

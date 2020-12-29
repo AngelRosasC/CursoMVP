@@ -1,7 +1,7 @@
-package com.arcode.daggerlogin.Root;
+package com.arcode.daggerlogin.root;
 
-import com.arcode.daggerlogin.Login.LoginActivity;
-import com.arcode.daggerlogin.Login.LoginModule;
+import com.arcode.daggerlogin.login.LoginActivity;
+import com.arcode.daggerlogin.login.LoginModule;
 
 import javax.inject.Singleton;
 

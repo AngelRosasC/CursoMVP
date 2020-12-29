@@ -1,4 +1,4 @@
-package com.arcode.daggerlogin.Login;
+package com.arcode.daggerlogin.login;
 
 public class LoginActivityModel implements LoginActivityMVP.Model {
 

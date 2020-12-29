@@ -1,8 +1,8 @@
 package com.arcode.daggerlogin;
 
-import com.arcode.daggerlogin.Login.LoginActivityMVP;
-import com.arcode.daggerlogin.Login.LoginActivityPresenter;
-import com.arcode.daggerlogin.Login.User;
+import com.arcode.daggerlogin.login.LoginActivityMVP;
+import com.arcode.daggerlogin.login.LoginActivityPresenter;
+import com.arcode.daggerlogin.login.User;
 
 import org.junit.Before;
 import org.junit.Test;

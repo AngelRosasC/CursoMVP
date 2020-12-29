@@ -1,8 +1,8 @@
-package com.arcode.daggerlogin.Root;
+package com.arcode.daggerlogin.root;
 
 import android.app.Application;
 
-import com.arcode.daggerlogin.Login.LoginModule;
+import com.arcode.daggerlogin.login.LoginModule;
 
 
 public class App extends Application {

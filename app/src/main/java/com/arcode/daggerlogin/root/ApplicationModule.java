@@ -1,4 +1,4 @@
-package com.arcode.daggerlogin.Root;
+package com.arcode.daggerlogin.root;
 
 import android.app.Application;
 import android.content.Context;

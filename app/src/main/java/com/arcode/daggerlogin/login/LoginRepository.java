@@ -1,4 +1,4 @@
-package com.arcode.daggerlogin.Login;
+package com.arcode.daggerlogin.login;
 
 public interface LoginRepository {
     void saveUser(User user);

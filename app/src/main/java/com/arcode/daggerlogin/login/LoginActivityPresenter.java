@@ -1,8 +1,8 @@
-package com.arcode.daggerlogin.Login;
+package com.arcode.daggerlogin.login;
 
 import androidx.annotation.Nullable;
 
-import com.arcode.daggerlogin.Utils.TextUtils;
+import com.arcode.daggerlogin.utils.TextUtils;
 
 public class LoginActivityPresenter implements LoginActivityMVP.Presenter {
     @Nullable

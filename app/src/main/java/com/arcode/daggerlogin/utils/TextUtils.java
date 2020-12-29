@@ -1,4 +1,4 @@
-package com.arcode.daggerlogin.Utils;
+package com.arcode.daggerlogin.utils;
 
 public class TextUtils {
     public static boolean isEmpty(CharSequence str) {
