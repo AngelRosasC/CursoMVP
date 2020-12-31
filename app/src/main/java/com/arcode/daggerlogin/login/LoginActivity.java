@@ -8,13 +8,27 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.arcode.daggerlogin.R;
+import com.arcode.daggerlogin.http.TwitchAPI;
+import com.arcode.daggerlogin.http.twitch.Game;
+import com.arcode.daggerlogin.http.twitch.Twitch;
 import com.arcode.daggerlogin.root.App;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
 import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.View {
     @Inject
     LoginActivityMVP.Presenter presenter;
+
+    @Inject
+    TwitchAPI twitchAPI;
 
     private EditText edtUsername;
     private EditText edtPassword;
@@ -30,6 +44,25 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
         bindUI();
 
         btnLogin.setOnClickListener(v -> presenter.loginButtonClicked());
+
+        /* Ejemplo de llamada de la API de twitch con retrofit */
+        Call<Twitch> call = twitchAPI.getTopGames("3pv98v9ct1bpwrzep1fw4zsfke6n26");
+        call.enqueue(new Callback<Twitch>() {
+            @Override
+            public void onResponse(Call<Twitch> call, Response<Twitch> response) {
+                if (response.body() != null) {
+                    List<Game> topGame = response.body().getGame();
+                    for (Game game : topGame) {
+                        System.out.println(game.getName());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Twitch> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
     }
 
