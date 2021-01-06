@@ -19,9 +19,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.functions.Predicate;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.View {
     @Inject
@@ -46,7 +56,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
         btnLogin.setOnClickListener(v -> presenter.loginButtonClicked());
 
         /* Ejemplo de llamada de la API de twitch con retrofit */
-        Call<Twitch> call = twitchAPI.getTopGames("3pv98v9ct1bpwrzep1fw4zsfke6n26");
+       /* Call<Twitch> call = twitchAPI.getTopGames("3pv98v9ct1bpwrzep1fw4zsfke6n26");
         call.enqueue(new Callback<Twitch>() {
             @Override
             public void onResponse(Call<Twitch> call, Response<Twitch> response) {
@@ -62,8 +72,34 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
             public void onFailure(Call<Twitch> call, Throwable t) {
                 t.printStackTrace();
             }
-        });
+        });*/
+        twitchAPI.getTopGamesObservable("3pv98v9ct1bpwrzep1fw4zsfke6n26")
+                .flatMap((Function<Twitch, Observable<Game>>) twitch -> Observable.fromIterable(twitch.getGame()))
+                .flatMap((Function<Game, Observable<String>>) game -> Observable.just(game.getName()))
+                .filter(s -> s.contains("w") || s.contains("W"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(@NonNull String name) {
+                        System.out.println("RxJava says: " + name);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override

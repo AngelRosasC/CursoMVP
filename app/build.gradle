@@ -29,7 +29,9 @@ android {
 }
 
 ext {
+    daggerVersion = '2.11'
     retrofitVersion = '2.9.0'
+    rxjava = '3.0.0'
 }
 
 dependencies {
@@ -43,8 +45,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     // Dagger
-    api 'com.google.dagger:dagger:2.11'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    api "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     //Gson
@@ -52,4 +54,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     //LoginInterceptor
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    // Programación reactiva con java
+    implementation "io.reactivex.rxjava3:rxandroid:$rxjava"
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+
 }
