@@ -13,24 +13,17 @@ import com.arcode.daggerlogin.http.twitch.Game;
 import com.arcode.daggerlogin.http.twitch.Twitch;
 import com.arcode.daggerlogin.root.App;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-
 import javax.inject.Inject;
 
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Function;
-import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.View {
@@ -40,18 +33,23 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
     @Inject
     TwitchAPI twitchAPI;
 
-    private EditText edtUsername;
-    private EditText edtPassword;
-    private Button btnLogin;
+    @BindView(R.id.edtUsername)
+    EditText edtUsername;
+    @BindView(R.id.edtPassword)
+    EditText edtPassword;
+    @BindView(R.id.btnLogin)
+    Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
+
         ((App) getApplication()).getComponent().inject(this);
 
-        bindUI();
+//        bindUI();
 
         btnLogin.setOnClickListener(v -> presenter.loginButtonClicked());
 
@@ -61,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
             @Override
             public void onResponse(Call<Twitch> call, Response<Twitch> response) {
                 if (response.body() != null) {
-                    List<Game> topGame = response.body().getGame();
+                    List<Game>  topGame = response.body().getGame();
                     for (Game game : topGame) {
                         System.out.println(game.getName());
                     }
@@ -110,9 +108,9 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
     }
 
     private void bindUI() {
-        edtUsername = findViewById(R.id.edtUsername);
+        /*edtUsername = findViewById(R.id.edtUsername);
         edtPassword = findViewById(R.id.edtPassword);
-        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnLogin);*/
     }
 
     @Override
